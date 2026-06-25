@@ -9,8 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
-import Testing
 import Package_Primitives
+import Testing
 
 @Suite("Target.Name")
 struct TargetNameTests {

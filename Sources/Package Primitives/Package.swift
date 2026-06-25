@@ -11,18 +11,20 @@
 
 /// Namespace for Swift package-domain identifier primitives.
 ///
-/// `Package` is the generic noun for the Swift-package-manifest
-/// domain entity. The namespace hosts typed identifiers — at v1.0.0,
-/// the `Package.Name` typealias over `Tagged<Package, Swift.String>`.
+/// `Package` is the generic noun for the package-manifest domain
+/// entity. The namespace hosts typed identifiers only — the
+/// `Package.Name` typealias over `Tagged<Package, Swift.String>`.
 ///
 /// Per the typed-identifier-naming framework, the namespace is
 /// generic rather than brand-flavored — `Package` not `SwiftPM.Package`
 /// — so cross-ecosystem tooling (registry analyzers, dependency
-/// tooling, manifest generators) can adopt the type without
+/// tooling, manifest generators) can adopt the types without
 /// importing a consumer-flavored surface.
 ///
-/// Future siblings (additive per framework Axiom 3) MAY include
-/// `Package.Identity` (registry scope.name composite per SE-0292),
-/// `Package.Manifest` (richer manifest model), `Package.Dependency`
-/// (typed dependency representation).
+/// SwiftPM-flavored types — `Package.Dependency`,
+/// `Package.Requirement`, `Package.Identity`, and the richer
+/// manifest model — live at L2 in `swift-spm-standard`, which
+/// re-extends this namespace with the SwiftPM-specific shapes
+/// per `swift-institute/Research/swift-package-domain-l1-l2-split.md`
+/// v1.0.0 (2026-05-14).
 public enum Package: Swift.Sendable {}
