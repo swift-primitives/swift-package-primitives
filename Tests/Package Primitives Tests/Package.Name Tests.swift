@@ -12,8 +12,19 @@
 import Package_Primitives
 import Testing
 
-@Suite("Package.Name")
-struct PackageNameTests {
+// `Package.Name` is `Tagged<Package, String>` — an unspecialized-generic
+// nested-type host: an extension at this concrete specialization compiles
+// but its nested `@Suite` types are shared across every `Tagged<Tag, _>`
+// specialization (collides with `Target.Name`'s and `Product.Name`'s own
+// suites). This uses the top-level backticked-name fallback instead.
+@Suite
+struct `Package.Name Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Package.Name Tests`.Unit {
     @Test
     func `Constructs from string literal`() {
         let name: Package.Name = "swift-primitives"
@@ -49,7 +60,9 @@ struct PackageNameTests {
         let b: Package.Name = "swift-b"
         #expect(a < b)
     }
+}
 
+extension `Package.Name Tests`.`Edge Case` {
     @Test
     func `Empty string is accepted (permissive contract)`() {
         let name: Package.Name = ""
